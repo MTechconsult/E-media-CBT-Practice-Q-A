@@ -1,178 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eminent Media CBT Practice Questions & Answers</title>
-  <style>
-    body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; background:#f9f9f9; }
-    header { background:#2c3e50; color:white; text-align:center; padding:20px 10px; }
-    h1 { margin:0; font-size:1.7rem; }
-    .notice { background:#fff; margin:20px auto; padding:15px; max-width:700px; border-radius:10px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
-    .notice p { font-size:15px; color:#333; line-height:1.5; }
-    .tabs { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-top:10px; }
-    .tab { display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; color:white; font-weight:600; padding:12px 18px; border-radius:10px; transition:0.3s; box-shadow:0 3px 8px rgba(0,0,0,0.2); }
-    .tab:hover { opacity:0.9; transform:scale(1.03); }
-    .facebook { background:#1877f2; }
-    .whatsapp { background:#25d366; }
-    .tab img { width:20px; height:20px; }
-    #loader { position:fixed; top:0; left:0; width:100%; height:100%; background:#2c3e50; color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999; font-size:1.2rem; }
-    .spinner { border:6px solid #f3f3f3; border-top:6px solid #ffd700; border-radius:50%; width:60px; height:60px; animation:spin 1s linear infinite; margin-bottom:15px; }
-    @keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
-    main { max-width:800px; margin:30px auto; padding:20px; background:#fff; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,0.1); display:none; }
-    form input, form select { padding:10px; width:100%; margin-bottom:15px; border-radius:6px; border:1px solid #ccc; font-size:15px; }
-    button { background:#2c3e50; color:white; padding:10px 18px; border:none; border-radius:8px; cursor:pointer; font-size:15px; transition:0.3s; }
-    button:hover { background:#1a242f; }
-    .question { margin-bottom:20px; }
-    .options label { display:block; background:#f0f0f0; margin:8px 0; padding:10px; border-radius:8px; cursor:pointer; }
-    .options label:hover { background:#dfe6e9; }
-    #quizSection { display:none; }
-    #timer { font-weight:bold; margin-bottom:10px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eminent Media CBT Practice</title>
+<style>
+body {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;margin:0;background:#f9f9f9;}
+header{background:#2c3e50;color:white;text-align:center;padding:20px;}
+header h1{margin:0;font-size:1.7rem;}
+.notice{background:#fff;margin:20px auto;padding:15px;max-width:700px;border-radius:10px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+.notice p{font-size:15px;line-height:1.5;}
+.tabs{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:10px;}
+.tab{display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:white;font-weight:600;padding:12px 18px;border-radius:10px;transition:0.3s;box-shadow:0 3px 8px rgba(0,0,0,0.2);}
+.tab:hover{opacity:0.9;transform:scale(1.03);}
+.facebook{background:#1877f2;}
+.whatsapp{background:#25d366;}
+.tab img{width:20px;height:20px;}
+#loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#2c3e50;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;}
+.spinner{border:6px solid #f3f3f3;border-top:6px solid #ffd700;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;margin-bottom:15px;}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+main{max-width:900px;margin:30px auto;padding:20px;background:#fff;border-radius:10px;box-shadow:0 3px 10px rgba(0,0,0,0.1);display:none;}
+form input,form select{padding:10px;width:100%;margin-bottom:15px;border-radius:6px;border:1px solid #ccc;}
+button{background:#2c3e50;color:white;padding:10px 18px;border:none;border-radius:8px;cursor:pointer;font-size:15px;transition:0.3s;}
+button:hover{background:#1a242f;}
+#examLobby,#quizSection,#resultSection{display:none;}
+#questionContainer{margin-bottom:15px;}
+.options label{display:block;background:#f0f0f0;margin:6px 0;padding:10px;border-radius:6px;cursor:pointer;}
+.options label:hover{background:#dfe6e9;}
+#timer{font-weight:bold;margin-bottom:15px;}
+#navigation{margin-top:10px;display:flex;justify-content:space-between;}
+</style>
 </head>
 <body>
-  <div id="loader">
-    <div class="spinner"></div>
-    <p>Loading CBT Environment... Please wait</p>
+
+<div id="loader">
+  <div class="spinner"></div>
+  <p>Loading CBT Environment...</p>
+</div>
+
+<header>
+  <h1>Eminent Media CBT Practice</h1>
+</header>
+
+<div class="notice">
+  <p><strong>Note:</strong> This is strictly a <em>practice platform</em> and not the official CDCFIB exam.</p>
+  <p>Follow <strong>Eminent Media</strong> on Facebook and WhatsApp for <strong>career growth</strong> and <strong>job opportunities</strong>.</p>
+  <p>Click below to start your 100-question CBT practice test.</p>
+  <div class="tabs">
+    <a href="https://www.facebook.com/profile.php?id=100067927826396" target="_blank" class="tab facebook">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"/> Facebook
+    </a>
+    <a href="https://whatsapp.com/channel/0029VaZ2jdeKGGGPSjJcO023" target="_blank" class="tab whatsapp">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"/> WhatsApp
+    </a>
+  </div>
+</div>
+
+<main id="mainContent">
+  <div id="examLobby">
+    <h3>Enter your details to begin</h3>
+    <form id="lobbyForm">
+      <input type="text" id="fullName" placeholder="Full Name" required>
+      <input type="text" id="phoneNumber" placeholder="Phone Number" required>
+      <select id="service" required>
+        <option value="">Select Service</option>
+        <option value="NSCDC">Civil Defence (NSCDC)</option>
+        <option value="NCoS">Correctional Service (NCoS)</option>
+        <option value="FFS">Fire Service (FFS)</option>
+        <option value="NIS">Immigration Service (NIS)</option>
+      </select>
+      <button type="submit">Start Exam</button>
+    </form>
   </div>
 
-  <header>
-    <h1>Eminent Media CBT Practice Questions & Answers</h1>
-  </header>
-
-  <div class="notice">
-    <p><strong>Note:</strong> This platform is strictly for <em>practice questions</em> and not the official CDCFIB test.</p>
-    <p>For <strong>career growth</strong>, <strong>job updates</strong>, and <strong>online opportunities</strong>, kindly follow <em>Eminent Media</em> by clicking any of the tabs below.</p>
-    <p>You can then proceed below to start your <strong>CBT Practice Test</strong>.</p>
-    <div class="tabs">
-      <a href="https://www.facebook.com/profile.php?id=100067927826396" target="_blank" class="tab facebook">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"/> Follow on Facebook
-      </a>
-      <a href="https://whatsapp.com/channel/0029VaZ2jdeKGGGPSjJcO023" target="_blank" class="tab whatsapp">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"/> Join WhatsApp Channel
-      </a>
+  <div id="quizSection">
+    <div id="timer">Time: 60:00</div>
+    <div id="questionContainer"></div>
+    <div id="navigation">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
     </div>
   </div>
 
-  <main id="mainContent">
-    <div id="userForm">
-      <h3>Enter your details to begin</h3>
-      <form id="detailsForm">
-        <input type="text" id="fullName" placeholder="Enter your full name" required />
-        <input type="text" id="phoneNumber" placeholder="Enter your phone number" required />
-        <select id="service" required>
-          <option value="">Select Service</option>
-          <option value="Civil Defence">Civil Defence (NSCDC)</option>
-          <option value="Correctional Service">Correctional Service (NCoS)</option>
-          <option value="Fire Service">Fire Service (FFS)</option>
-          <option value="Immigration Service">Immigration Service (NIS)</option>
-        </select>
-        <button type="submit">Start Test</button>
-      </form>
+  <div id="resultSection">
+    <h3>Exam Completed!</h3>
+    <p id="scoreDisplay"></p>
+    <button id="retryBtn">Retry Test</button>
+  </div>
+</main>
+
+<script>
+const loader = document.getElementById('loader');
+const mainContent = document.getElementById('mainContent');
+const examLobby = document.getElementById('examLobby');
+const quizSection = document.getElementById('quizSection');
+const resultSection = document.getElementById('resultSection');
+const questionContainer = document.getElementById('questionContainer');
+const timerDisplay = document.getElementById('timer');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const retryBtn = document.getElementById('retryBtn');
+
+let questions = [], currentQuestion = 0, answers = [], score = 0, timeLeft = 60*60, timerInterval;
+
+window.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{
+    loader.style.display='none';
+    mainContent.style.display='block';
+    examLobby.style.display='block';
+  },1000);
+});
+
+// Sample questions with correct answers included in options
+const sampleQuestions = [
+  // Current Affairs
+  {question:"Who is the current Vice President of Nigeria?", options:["Yemi Osinbajo","Goodluck Jonathan","Olusegun Obasanjo","Atiku Abubakar"], correct:0, category:"Current Affairs"},
+  {question:"Nigeria recently hosted which major summit?", options:["ECOWAS Summit","UN General Assembly","G20 Summit","African Union Summit"], correct:3, category:"Current Affairs"},
+  // General Knowledge
+  {question:"NSCDC is under which ministry?", options:["Ministry of Defence","Ministry of Interior","Ministry of Health","Ministry of Education"], correct:1, category:"General Knowledge"},
+  {question:"The primary function of the Federal Fire Service is?", options:["Rescue operations","Border control","Civil protection","Immigration"], correct:0, category:"General Knowledge"},
+  {question:"NIS manages?", options:["Immigration","Fire emergencies","Correctional centers","Education"], correct:0, category:"General Knowledge"},
+  // CDCFIB Basic Knowledge
+  {question:"CDCFIB stands for?", options:["Civil Defence, Correctional, Fire & Immigration Board","Civil Development, Correctional & Fire Bureau","Correctional & Fire Services","Civil Defence Corps for Fire & Immigration Board"], correct:0, category:"Basic Knowledge"},
+  {question:"NSCDC was established in?", options:["1967","1970","1984","1999"], correct:0, category:"Basic Knowledge"},
+  {question:"NCoS recruits are selected based on?", options:["Merit","Seniority","Random","Bribery"], correct:0, category:"Basic Knowledge"}
+];
+
+// Generate 100 questions (ensuring all correct answers exist in options)
+function generateQuestions(service){
+  questions = [];
+  for(let i=0;i<34;i++){ // replicate to reach 100
+    sampleQuestions.forEach(q=>{
+      let qCopy = {...q};
+      qCopy.question = qCopy.question.replace(/NSCDC|NCoS|FFS|NIS/g, service);
+      questions.push(qCopy);
+    });
+  }
+  questions = questions.slice(0,100);
+  answers = Array(questions.length).fill(null);
+}
+
+function startTimer(){
+  timerInterval = setInterval(()=>{
+    if(timeLeft <= 0){clearInterval(timerInterval);finishExam();return;}
+    let m = Math.floor(timeLeft/60), s = timeLeft%60;
+    timerDisplay.textContent = `Time: ${m}:${s<10?'0':''}${s}`;
+    timeLeft--;
+  },1000);
+}
+
+function showQuestion(){
+  const q = questions[currentQuestion];
+  questionContainer.innerHTML = `
+    <h4>Q${currentQuestion+1} [${q.category}]: ${q.question}</h4>
+    <div class="options">
+      ${q.options.map((opt,i)=>`
+        <label><input type="radio" name="option" value="${i}" ${answers[currentQuestion]===i?'checked':''}/> ${opt}</label>
+      `).join('')}
     </div>
+  `;
+}
 
-    <div id="quizSection">
-      <div id="timer">Time: 60:00</div>
-      <div id="questionContainer"></div>
-      <button id="nextBtn">Next Question</button>
-    </div>
-  </main>
+nextBtn.addEventListener('click',()=>{
+  const selected = document.querySelector('input[name="option"]:checked');
+  if(selected) answers[currentQuestion] = parseInt(selected.value);
+  currentQuestion++;
+  if(currentQuestion >= questions.length) finishExam();
+  else showQuestion();
+});
 
-  <audio id="startSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
-  <audio id="correctSound" src="https://www.soundjay.com/button/beep-08b.wav"></audio>
-  <audio id="wrongSound" src="https://www.soundjay.com/button/beep-10.wav"></audio>
+prevBtn.addEventListener('click',()=>{
+  if(currentQuestion > 0) currentQuestion--;
+  showQuestion();
+});
 
-  <script>
-    // Sharp loader to mainContent
-    window.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-      }, 1000); // 1 second loader
-    });
+function finishExam(){
+  clearInterval(timerInterval);
+  score = answers.reduce((a,v,i)=>v===questions[i].correct?a+1:a,0);
+  quizSection.style.display='none';
+  resultSection.style.display='block';
+  document.getElementById('scoreDisplay').textContent = `You scored ${score} out of ${questions.length}`;
+}
 
-    const form = document.getElementById("detailsForm");
-    const quizSection = document.getElementById("quizSection");
-    const userForm = document.getElementById("userForm");
-    const questionContainer = document.getElementById("questionContainer");
-    const nextBtn = document.getElementById("nextBtn");
-    const timerDisplay = document.getElementById("timer");
-    const startSound = document.getElementById("startSound");
-    const correctSound = document.getElementById("correctSound");
-    const wrongSound = document.getElementById("wrongSound");
+retryBtn.addEventListener('click',()=>location.reload());
 
-    let currentQuestion = 0;
-    let score = 0;
-    let timeLeft = 60 * 60; // 60 minutes
-    let timerInterval;
-    let questions = [];
-
-    function generateQuestions(service) {
-      const arr = [];
-      for (let i = 1; i <= 100; i++) {
-        arr.push({
-          question: `${service} Practice Question ${i}: This is a sample question text?`,
-          options: ["Option A", "Option B", "Option C", "Option D"],
-          correct: Math.floor(Math.random() * 4)
-        });
-      }
-      return arr;
-    }
-
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          alert("Time up! Your score: " + score + " / 100");
-          return;
-        }
-        let minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-        timerDisplay.textContent = `Time: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-        timeLeft--;
-      }, 1000);
-    }
-
-    function displayQuestion() {
-      if (currentQuestion >= questions.length) {
-        alert("Test Completed! Your score: " + score + " / 100");
-        return;
-      }
-      const q = questions[currentQuestion];
-      questionContainer.innerHTML = `
-        <div class="question">
-          <h4>${q.question}</h4>
-          <div class="options">
-            ${q.options.map((opt, i) => `
-              <label><input type="radio" name="option" value="${i}"/> ${opt}</label>
-            `).join("")}
-          </div>
-        </div>
-      `;
-    }
-
-    nextBtn.addEventListener("click", () => {
-      const selected = document.querySelector('input[name="option"]:checked');
-      if (!selected) { alert("Please select an answer!"); return; }
-      const answer = parseInt(selected.value);
-      if (answer === questions[currentQuestion].correct) correctSound.play(), score++;
-      else wrongSound.play();
-      currentQuestion++;
-      displayQuestion();
-    });
-
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const service = document.getElementById("service").value;
-      if (!service) { alert("Select a service!"); return; }
-      questions = generateQuestions(service);
-      userForm.style.display = "none";
-      quizSection.style.display = "block";
-      startSound.play();
-      startTimer();
-      displayQuestion();
-    });
-  </script>
+document.getElementById('lobbyForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const service = document.getElementById('service').value;
+  if(!service) return alert('Select a service!');
+  generateQuestions(service);
+  examLobby.style.display='none';
+  quizSection.style.display='block';
+  showQuestion();
+  startTimer();
+});
+</script>
 </body>
-      </html>
-  
+</html>
+
