@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Eminent Media CBT Practice Questions & Answers</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+  <style>
+    :root{
+      --bg:#f3f6fb; --card:#ffffff; --muted:#6b7280; --accent:#0ea5a3; --brand:#004aad;
+      --success:#10b981; --danger:#ef4444;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:linear-gradient(180deg,#eef6fb, #f3f7fb);
+      color:#0b1320; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      min-height:100vh; display:flex; flex-direction:column;
+    }
+
+    /* Header */
+    header{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 20px; background:var(--brand); color:white;
+      box-shadow:0 6px 18px rgba(2,6,23,0.18);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand .logo{
+      width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#2563eb);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#021014;
+    }
+    .brand h1{font-size:16px;margin:0}
+    .tabs{display:flex;gap:10px;align-items:center}
+    .tab{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;color:white;text-decoration:none;font-weight:600}
+    .tab img{width:18px;height:18px}
+    .facebook{background:#1877f2}
+    .whatsapp{background:#25d366;color:#04280f}
+    .tab .label{font-size:14px}
+    @media (max-width:720px){ header{flex-direction:column;align-items:flex-start} .tabs{width:100%;margin-top:8px} }
+
+    /* App container */
+    .app{
+      width:min(1200px,96vw);
+      margin:28px auto;
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+    @media (max-width:980px){ .app{grid-template-columns:1fr} }
+
+    /* Left sidebar */
+    aside.sidebar{
+      background:var(--card); border-radius:12px; padding:18px; box-shadow:0 6px 20px rgba(2,6,23,0.06);
+      min-height: 240px;
+    }
+    .meta{display:flex;flex-direction:column;gap:10px}
+    .meta .muted{color:var(--muted);font-size:13px}
+    .timer{font-weight:800;font-size:20px;color:var(--brand)}
+    .palette{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}
+    .qnum{background:transparent;border:1px solid rgba(2,6,23,0.06);padding:8px;border-radius:8px;text-align:center;cursor:pointer;color:var(--muted);font-weight:700}
+    .qnum.answered{background:linear-gradient(90deg,var(--accent),#2563eb);color:#021014;border:none}
+    .qnum.flagged{box-shadow: inset 0 0 0 2px rgba(239,68,68,0.12)}
+    .legend{display:flex;gap:8px;align-items:center;margin-top:12px;color:var(--muted)}
+    .chip{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+    /* Main area */
+    main.card{
+      background:var(--card); padding:22px;border-radius:12px; box-shadow:0 6px 20px rgba(2,6,23,0.06);
+    }
+    .start-screen{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+    @media (max-width:980px){ .start-screen{flex-direction:column} }
+    .info{color:var(--muted);line-height:1.5}
+    .btn{background:var(--brand);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.secondary{background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--muted)}
+    .form-row{display:flex;gap:12px;flex-direction:column;margin-top:12px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    input[type="text"], input[type="tel"], select{
+      padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.06);font-size:15px;
+    }
+
+    /* question area */
+    .q-header{display:flex;justify-content:space-between;align-items:center}
+    .q-number{font-weight:800;color:var(--accent)}
+    .q-text{margin:12px 0 18px 0;font-size:17px}
+    .options{display:flex;flex-direction:column;gap:10px}
+    .option{padding:12px;border-radius:10px;border:1px solid rgba(2,6,23,0.06);display:flex;gap:12px;align-items:center;cursor:pointer}
+    .option input{accent-color:var(--accent)}
+    .option.selected{background:linear-gradient(90deg, rgba(6,182,212,0.08), rgba(37,99,235,0.03));border-color:rgba(6,182,212,0.12)}
+    .controls{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px}
+    .controls .left, .controls .right{display:flex;gap:8px;align-items:center}
+
+    .notice{background:rgba(2,6,23,0.02);padding:10px;border-radius:8px;color:var(--muted);font-size:13px;margin-top:12px}
+
+    /* review result */
+    .review .correct{background:#d4edda;border-color:#28a745}
+    .review .wrong{background:#fde2e2;border-color:#dc3545}
+    .footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* loading full-screen */
+    #loadingScreen{
+      position:fixed;left:0;top:0;width:100%;height:100%;background:var(--brand);color:white;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;
+    }
+    .spinner{width:64px;height:64px;border-radius:50%;border:8px solid rgba(255,255,255,0.14);border-top:8px solid #ffd166; animation:spin 1s linear infinite;margin-bottom:16px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* small screens */
+    @media (max-width:520px){
+      .palette{grid-template-columns:repeat(10,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loadingScreen" role="dialog" aria-modal="true" style="display:flex;">
+    <div class="spinner" aria-hidden="true"></div>
+    <div style="font-weight:700;font-size:18px">Loading Eminent Media CBT Environment...</div>
+    <div style="margin-top:8px;color:rgba(255,255,255,0.9)">Please wait — preparing your practice test</div>
+  </div>
+
+  <!-- Header with tabs -->
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">EM</div>
+      <div>
+        <h1>Eminent Media CBT Practice</h1>
+        <div style="font-size:12px;color:rgba(255,255,255,0.9)">Your media for online opportunities</div>
+      </div>
+    </div>
+    <div class="tabs" role="navigation" aria-label="Social links">
+      <a class="tab facebook" href="https://www.facebook.com/profile.php?id=100067927826396" target="_blank" rel="noopener">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" /><span class="label">Facebook — Click Here</span>
+      </a>
+      <a class="tab whatsapp" href="https://whatsapp.com/channel/0029VaZ2jdeKGGGPSjJcO023" target="_blank" rel="noopener">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" /><span class="label">WhatsApp — Click Here</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- App layout -->
+  <div class="app" role="application" aria-label="Eminent Media CBT Practice">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="sidebar">
+      <div class="meta">
+        <div><strong>Candidate</strong></div>
+        <div class="muted" id="candidateName">— Not started —</div>
+        <div style="margin-top:8px" class="muted">Time left</div>
+        <div class="timer" id="timerDisplay">60:00</div>
+        <div style="margin-top:10px" class="muted">Questions</div>
+        <div style="font-weight:800">100</div>
+        <div class="legend">
+          <span><span class="chip" style="background:var(--accent)"></span> Answered</span>
+          <span><span class="chip" style="background:transparent;border:1px solid rgba(2,6,23,0.06)"></span> Not answered</span>
+          <span><span class="chip" style="background:transparent;border-radius:3px;border:2px solid rgba(239,68,68,0.18)"></span> Flagged</span>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <strong>Question Palette</strong>
+        <div class="palette" id="palette" aria-label="question palette">
+          <!-- numbers rendered here -->
+        </div>
+      </div>
+
+      <div class="footer" style="margin-top:14px">
+        <div style="font-weight:700">Eminent Media</div>
+        <div class="muted">Follow for jobs & career growth</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="card" id="mainCard">
+      <!-- Start / form screen -->
+      <section id="startSection" class="start-screen" aria-hidden="false">
+        <div style="flex:1">
+          <h2>Welcome to the Eminent Media CBT Practice</h2>
+          <p class="info">This practice test mimics the CDCFIB CBT. You will complete <strong>100 questions</strong> for the selected service within <strong>60 minutes</strong>. Your progress will be saved automatically.</p>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="candidateNameInput">Full name</label>
+              <input id="candidateNameInput" type="text" placeholder="Enter your full name" autocomplete="name" />
+            </div>
+
+            <div class="field">
+              <label for="phoneInput">Phone number (for practice)</label>
+              <input id="phoneInput" type="tel" placeholder="Enter phone number" />
+            </div>
+
+            <div class="field">
+              <label for="serviceSelect">Select service to practice</label>
+              <select id="serviceSelect" aria-label="Select service">
+                <option value="" disabled selected>Choose a service</option>
+                <option value="NSCDC">Civil Defence (NSCDC)</option>
+                <option value="NCOS">Correctional Service (NCoS)</option>
+                <option value="FFS">Fire Service (FFS)</option>
+                <option value="NIS">Immigration Service (NIS)</option>
+              </select>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:6px">
+              <button class="btn" id="btnBegin">Begin Test</button>
+              <button class="btn secondary" id="btnDemo">Demo (10 Qs)</button>
+            </div>
+            <div class="notice">Note: This is a mock practice—enter any name or number. The full test contains 100 questions per selected service. You can reload and continue later.</div>
+          </div>
+        </div>
+
+        <div style="width:320px;padding-left:18px">
+          <div style="background:linear-gradient(180deg,#f8fafc,#ffffff);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(2,6,23,0.04)">
+            <h3 style="margin:0 0 8px 0">Test Info</h3>
+            <div class="muted">Duration: <strong>60 minutes</strong></div>
+            <div class="muted" style="margin-top:8px">Questions: <strong>100</strong></div>
+            <div class="muted" style="margin-top:8px">Topics: Current Affairs, Service Knowledge, English, Mathematics, Operations</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Test card -->
+      <section id="testSection" style="display:none" aria-hidden="true">
+        <div class="q-header">
+          <div>
+            <div class="q-number" id="qIndex">Question 1</div>
+            <div class="muted" id="qTopic">Topic: General</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <label class="muted">Flag for review</label>
+            <input type="checkbox" id="flagToggle" aria-label="Flag question" />
+          </div>
+        </div>
+
+        <div class="q-text" id="qText">Question text</div>
+
+        <form id="optionsForm" class="options" aria-label="options"></form>
+
+        <div class="controls">
+          <div class="left">
+            <button class="btn secondary" id="btnPrev">Previous</button>
+            <button class="btn secondary" id="btnNext">Next</button>
+            <button class="btn secondary" id="btnClear">Clear</button>
+            <button class="btn secondary" id="btnFlag">Toggle Flag</button>
+          </div>
+
+          <div class="right">
+            <div class="muted" id="status">Not answered</div>
+            <button class="btn" id="btnSubmit">Submit Test</button>
+          </div>
+        </div>
+
+        <div class="notice" style="margin-top:12px">Keyboard: ← previous, → next, numbers 1–9 to jump within first 9.</div>
+      </section>
+
+      <!-- Result -->
+      <section id="resultSection" style="display:none" aria-hidden="true">
+        <h2>Test Submitted</h2>
+        <p class="muted">Summary — your answers and review are below. Use this to improve.</p>
+        <div style="display:flex;gap:18px;margin-top:12px;flex-wrap:wrap">
+          <div><div class="muted">Answered</div><div style="font-weight:800" id="resAnswered">0</div></div>
+          <div><div class="muted">Flagged</div><div style="font-weight:800" id="resFlagged">0</div></div>
+          <div><div class="muted">Not Answered</div><div style="font-weight:800" id="resNotAnswered">0</div></div>
+        </div>
+
+        <div id="reviewArea" style="margin-top:16px" class="review"></div>
+
+        <div style="margin-top:16px">
+          <button class="btn" id="btnRestart">Restart (clear progress)</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Sounds -->
+  <audio id="sndStart" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_ef4cb1ce1f.mp3?filename=startup-sound-1-153727.mp3"></audio>
+  <audio id="sndCorrect" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_679a4e4c4e.mp3?filename=success-1-6297.mp3"></audio>
+  <audio id="sndWrong" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8dce2b7e49.mp3?filename=error-2-126514.mp3"></audio>
+
+  <script>
+    /*************************************************************************
+     * Eminent Media CBT Practice — Single-file application
+     * - Asks for name, phone, service after loading
+     * - Generates 100 questions per service (placeholder text; replace with real bank)
+     * - Saves/Restores full progress in localStorage
+     * - 60-minute timer with auto-submit
+     * - Flagging, question palette, review screen with correct/wrong display
+     *************************************************************************/
+
+    // --- Configuration ---
+    const TOTAL_Q = 100;
+    const DEMO_Q = 10;
+    const TEST_DURATION_SEC = 60 * 60; // 60 minutes
+
+    // DOM
+    const loadingScreen = document.getElementById('loadingScreen');
+    const startSection = document.getElementById('startSection');
+    const btnBegin = document.getElementById('btnBegin');
+    const btnDemo = document.getElementById('btnDemo');
+    const candidateNameInput = document.getElementById('candidateNameInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const serviceSelect = document.getElementById('serviceSelect');
+    const candidateNameDisplay = document.getElementById('candidateName');
+
+    const testSection = document.getElementById('testSection');
+    const resultSection = document.getElementById('resultSection');
+
+    const timerDisplay = document.getElementById('timerDisplay');
+    const paletteEl = document.getElementById('palette');
+    const qIndexEl = document.getElementById('qIndex');
+    const qTopicEl = document.getElementById('qTopic');
+    const qTextEl = document.getElementById('qText');
+    const optionsForm = document.getElementById('optionsForm');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnClear = document.getElementById('btnClear');
+    const btnFlag = document.getElementById('btnFlag');
+    const flagToggle = document.getElementById('flagToggle');
+    const statusEl = document.getElementById('status');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    const resAnswered = document.getElementById('resAnswered');
+    const resFlagged = document.getElementById('resFlagged');
+    const resNotAnswered = document.getElementById('resNotAnswered');
+    const reviewArea = document.getElementById('reviewArea');
+    const btnRestart = document.getElementById('btnRestart');
+
+    // Sounds
+    const sndStart = document.getElementById('sndStart');
+    const sndCorrect = document.getElementById('sndCorrect');
+    const sndWrong = document.getElementById('sndWrong');
+
+    // state (persisted)
+    const STORAGE_KEY = 'em_cbt_v1';
+
+    let state = {
+      candidate: { name: '', phone: '', service: '' },
+      started: false,
+      startTs: null,
+      secondsLeft: TEST_DURATION_SEC,
+      questions: {}, // map service-> array of questions (each {q,choices,correct,topic})
+      currentIndex: 0,
+      answers: {}, // index -> choiceIndex
+      flagged: {}, // index->true
+      visibleCount: TOTAL_Q,
+      demoMode: false
+    };
+
+    // Helper: save and load
+    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    function loadState(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return false;
+      try{ const s = JSON.parse(raw); state = Object.assign(state, s); return true; } catch(e){ console.warn('Failed to load state', e); return false; }
+    }
+
+    // show loading then show start form (and restore if present)
+    window.addEventListener('load', ()=>{
+      // simulate loading then show form or restore
+      setTimeout(()=>{
+        loadingScreen.style.display = 'none';
+        // attempt to load
+        const ok = loadState();
+        if(ok && state.candidate && state.candidate.name){
+          candidateNameInput.value = state.candidate.name || '';
+          phoneInput.value = state.candidate.phone || '';
+          serviceSelect.value = state.candidate.service || '';
+          candidateNameDisplay.textContent = state.candidate.name || '— Not started —';
+        }
+        // If a test was in progress, offer to continue
+        if(ok && state.started){
+          // If test already completed? we'll check
+          if(state.currentIndex >= state.visibleCount){
+            // Show results
+            renderResult();
+            startSection.style.display='none';
+            testSection.style.display='none';
+            resultSection.style.display='';
+          } else {
+            // Continue where left
+            startSection.style.display='none';
+            testSection.style.display='';
+            candidateNameDisplay.textContent = state.candidate.name || '—';
+            restoreQuestionsIfNeeded();
+            startTimer();
+            renderPalette();
+            renderQuestion();
+          }
+        } else {
+          startSection.style.display='';
+        }
+      }, 1000);
+    });
+
+    // Generate question bank for a service: placeholder templates — replace with real content as needed.
+    function generateQuestionsFor(service){
+      const arr = [];
+      for(let i=0;i<TOTAL_Q;i++){
+        // create a service-specific template question for variety
+        const topic = (i%5===0) ? 'Current Affairs' : (i%5===1) ? 'English' : (i%5===2) ? 'Mathematics' : (i%5===3) ? service : 'Operations';
+        const qText = `${service} — ${topic} question number ${i+1}: (placeholder) Choose the best option.`;
+        // four choices
+        const choices = [
+          `${service} choice A for Q${i+1}`,
+          `${service} choice B for Q${i+1}`,
+          `${service} choice C for Q${i+1}`,
+          `${service} choice D for Q${i+1}`
+        ];
+        // pick a deterministic correct index for reproducibility: use (i % 4)
+        const correct = i % 4;
+        arr.push({ topic, q: qText, choices, correct });
+      }
+      return arr;
+    }
+
+    // Demo generator (10 q)
+    function generateDemoQuestions(service){
+      const arr = [];
+      for(let i=0;i<DEMO_Q;i++){
+        const topic = ['Current Affairs','English','Mathematics','Service Knowledge','Operations'][i%5];
+        const qText = `${service} — Demo ${topic} question ${i+1}`;
+        const choices = [
+          `${topic} demo A`,
+          `${topic} demo B`,
+          `${topic} demo C`,
+          `${topic} demo D`
+        ];
+        arr.push({topic, q:qText, choices, correct: i%4});
+     
